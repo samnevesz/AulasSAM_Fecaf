@@ -3,6 +3,7 @@ Mensagem: 'Preciso urgente da segunda via da fatura'
 Intenção Predita: [segunda_via]
 Vocabulário Filtrado (sem stopwords): ['2a', '2a via', 'aberto', 'acordo', 'acordo pagar', 'alterar', 'alterar endereço', 'app', 'atrasada', 'atualizo', 'atualizo dados', 'boleto', 'cadastramento', 'dados', 'dados residenciais', 'débito', 'débito aberto', 'dívida', 'emitir', 'emitir segunda', 'endereço', 'endereço cadastramento', 'fatura', 'fatura atrasada', 'fazer', 'fazer um', 'gostaria', 'gostaria alterar', 'negociar', 'negociar pagamento', 'no', 'no app', 'onde', 'onde atualizo', 'pagamento', 'pagamento dívida', 'pagar', 'pagar débito', 'posso', 'posso emitir', 'residenciais', 'residenciais no', 'segunda', 'segunda via', 'um', 'um acordo', 'via', 'via boleto', 'via fatura']
 
+
 1. Impacto da Remoção de Stopwords
 A remoção reduz drasticamente a dimensão da matriz de termos, eliminando ruído e palavras com alta frequência que não possuem valor semântico discriminativo (como preposições e artigos). Isso diminui a complexidade computacional do modelo e foca os pesos do TF-IDF apenas em palavras com real valor preditivo.
 
@@ -11,6 +12,7 @@ A instrução extrai tanto unigramas (palavras individuais) quanto bigramas (par
 
 3. Prevenção de Classificações Incorretas
 Palavras genéricas (ex: como, preciso, minha) aparecem em mensagens de qualquer intenção. Se não forem removidas, o TF-IDF atribui peso a termos semântica irrelevantes. Sem elas, o modelo aloca importância estritamente às palavras-chave que diferenciam as classes (ex: boleto, dívida, endereço), evitando sobreajuste em ruídos gramaticais.
+
 
 --- RESULTADOS DO LAB 02 (AULA 03) ---
 
@@ -43,6 +45,9 @@ Quanto maiores os valores na diagonal principal (e menores fora dela), melhor é
 3. Por que a acurácia isolada pode ser enganosa em classes desbalanceadas?
 Porque a acurácia calcula apenas o total de acertos sobre o total geral, ignorando o desempenho em classes menores.
 Exemplo: Se 95% das mensagens forem sobre Localização e 5% sobre Troca, um modelo que chutar sempre "Localização" terá 95% de acurácia, mas errará 100% dos pedidos de Troca.
+
+
+Lab 3 / Perguntas
 
 1.CÓDIGO FEITO
 import pandas as pd
