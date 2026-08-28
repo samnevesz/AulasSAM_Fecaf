@@ -90,3 +90,70 @@ for i in range(1, 11):
             "Desculpe, nao entendi sua solicitacao. "
             "Encaminhando voce para um atendente humano..."
         )
+
+
+
+
+# O que saiu no terminal e o que foi escrito:
+=== RELATORIO DE CLASSIFICACAO ===
+                    precision    recall  f1-score   support
+
+logistica_entregas       1.00      1.00      1.00         6
+       reclamacoes       1.00      1.00      1.00         6
+           suporte       1.00      1.00      1.00         6
+ trocas_devolucoes       1.00      1.00      1.00         6
+            vendas       1.00      1.00      1.00         6
+
+          accuracy                           1.00        30
+         macro avg       1.00      1.00      1.00        30
+      weighted avg       1.00      1.00      1.00        30
+
+
+=== MATRIZ DE CONFUSAO ===
+[[6 0 0 0 0]
+ [0 6 0 0 0]
+ [0 0 6 0 0]
+ [0 0 0 6 0]
+ [0 0 0 0 6]]
+
+=== INICIANDO BATERIA DE TESTES (10 INPUTS OBRIGATORIOS) ===
+
+[Teste 1/10]
+Digite a frase do cliente: Ola quero um sofa
+Intencao: vendas | Confianca: 100.0%
+
+[Teste 2/10]
+Digite a frase do cliente: Guarda roupa ta quanto
+Intencao: vendas | Confianca: 100.0%
+
+[Teste 3/10]
+Digite a frase do cliente: Montar o armario
+Intencao: suporte | Confianca: 100.0%
+
+[Teste 4/10]
+Digite a frase do cliente: A estante ta quanto
+Intencao: suporte | Confianca: 100.0%
+
+[Teste 5/10]
+Digite a frase do cliente: ver as mesas
+Desculpe, nao entendi sua solicitacao. Encaminhando voce para um atendente humano...
+
+[Teste 6/10]
+Digite a frase do cliente: como fazer o reembolso dos produtos
+Intencao: reclamacoes | Confianca: 100.0%
+
+[Teste 7/10]
+Digite a frase do cliente: quero atendimento com humano
+Intencao: reclamacoes | Confianca: 100.0%
+
+[Teste 8/10]
+Digite a frase do cliente: Entrega chegou?
+Intencao: logistica_entregas | Confianca: 66.7%
+
+[Teste 9/10]
+Digite a frase do cliente: Cade o pedido
+Intencao: logistica_entregas | Confianca: 66.7%
+
+[Teste 10/10]
+Digite a frase do cliente: Qual preço da geladeira
+Intencao: logistica_entregas | Confianca: 100.0%
