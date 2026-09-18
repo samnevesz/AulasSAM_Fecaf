@@ -1,1 +1,166 @@
+--------------------------------------------------------------------------------
+EXERCÍCIO 01: Pré-processamento — Stopwords e Lematização 
+--------------------------------------------------------------------------------
+tokens = ["os", "produtos", "comprados", "não", "chegaram"]
+stopwords = ["os", "não"]
 
+tokens_limpos = []
+
+for palavra in tokens:
+    if palavra in stopwords:
+        continue
+    elif palavra == "comprados":
+        tokens_limpos.append("comprar")
+    elif palavra == "chegaram":
+        tokens_limpos.append("chegar")
+    else:
+        tokens_limpos.append(palavra)
+
+print(tokens_limpos)
+
+Resposta:
+O Stemming aplica cortes mecânicos no final da palavra com base em regras fixas pra achar o radical, o que pode gerar termos que nem existem no idioma. Já a Lematização analisa a gramática e usa dicionários para transformar a palavra na sua forma canônica (lema), garantindo que o resultado sempre seja uma palavra válida no dicionário.
+
+
+--------------------------------------------------------------------------------
+EXERCÍCIO 02: Validação de NLU — Threshold e Fallback
+--------------------------------------------------------------------------------
+def validar_intencao(confianca):
+    if confianca >= 0.70:
+        return "Ação Executada"
+    return "Fallback Acionado"
+
+print(validar_intencao(0.55))
+
+Resposta:
+Com um threshold baixo de 20%, o sistema aceitaria frases com um nível altíssimo de dúvida como se fossem certeiras. Em um sistema bancário, isso faria o bot executar transações críticas (como pagamentos, PIX ou transferências) entendendo a intenção do cliente de forma errada.
+
+
+--------------------------------------------------------------------------------
+EXERCÍCIO 03: Ponderação de Palavras — Lógica TF-IDF
+--------------------------------------------------------------------------------
+def calcular_peso_tfidf(frequencia_geral):
+    if frequencia_geral == "muito_frequente":
+        return 0.1
+    elif frequencia_geral == "pouco_frequente":
+        return 0.9
+
+print(calcular_peso_tfidf("pouco_frequente"))
+
+Resposta:
+A lógica é medir o poder de diferenciação do termo. Palavras muito frequentes aparecem em quase todos os documentos da base e não ajudam a definir o assunto do texto, recebendo peso baixo. Já as palavras raras concentram a informação principal do documento e ajudam a identificar o contexto exato, por isso ganham peso mais alto.
+
+
+--------------------------------------------------------------------------------
+EXERCÍCIO 04: Métricas de Avaliação — Calculando a Precisão
+--------------------------------------------------------------------------------
+vp = 80
+fp = 20
+fn = 5
+
+precisao = vp / (vp + fp)
+
+print(f"{precisao * 100}%")
+
+Resposta:
+Falso Positivo (FP) é o sistema classificar uma transação legítima como fraude (bloqueia o cliente sem necessidade). Falso Negativo (FN) é deixar passar uma fraude real como se fosse uma transação normal. O Falso Negativo é o que gera prejuízo financeiro direto, porque a fraude se concretiza e a empresa assume a perda do dinheiro/chargeback.
+
+
+--------------------------------------------------------------------------------
+EXERCÍCIO 05: Estruturação de NLU — Dicionário de Intenção e Entidades
+--------------------------------------------------------------------------------
+solicitacao = {
+    "intencao": "comprar_medicamento",
+    "produto": "analgésico",
+    "quantidade": 2
+}
+
+print(solicitacao)
+
+Resposta:
+Intenção (Intent) é o objetivo geral do usuário na frase, ou seja, o que ele quer fazer (ex: comprar medicamento). Entidade (Slot) são os dados e detalhes específicos extraídos do texto que servem de parâmetro pra conseguir executar a intenção (ex: o nome do remédio e a quantidade).
+
+
+--------------------------------------------------------------------------------
+EXERCÍCIO 06: Representação Vetorial — Proximidade em Word Embeddings
+--------------------------------------------------------------------------------
+def sao_sinonimos(distancia):
+    if distancia < 0.20:
+        return True
+    return False
+
+print(sao_sinonimos(0.05))
+
+Resposta:
+O TF-IDF só analisa contagem de palavras exatas (bag-of-words), tratando palavras diferentes como termos totalmente isolados sem ligação de sentido. O Word Embeddings mapeia palavras em um espaço vetorial baseado no contexto em que elas costumam aparecer, colocando palavras com significados semelhantes próximas geometricamente umas das outras.
+
+
+--------------------------------------------------------------------------------
+EXERCÍCIO 07: Limpeza de Texto — Tokenização, Pontuação e Stopwords
+--------------------------------------------------------------------------------
+bruta = ["O", "sistema", "está", "muito", "lento", "hoje", "!"]
+stopwords = ["O", "está"]
+
+tokens_limpos = []
+
+for token in bruta:
+    if token not in stopwords and token != "!":
+        tokens_limpos.append(token)
+
+print(tokens_limpos)
+
+Resposta:
+Stopwords são palavras muito comuns (como artigos e preposições) que servem só pra dar estrutura gramatical e não trazem conteúdo relevante pro sentido da mensagem. Remover elas elimina ruído do texto e faz o modelo focar nas palavras que realmente carregam o significado principal.
+
+
+--------------------------------------------------------------------------------
+EXERCÍCIO 08: Métricas de Avaliação — Calculando o Recall
+--------------------------------------------------------------------------------
+vp = 90
+fn = 10
+
+recall = vp / (vp + fn)
+
+print(f"{recall * 100}%")
+
+Resposta:
+O Recall foca em evitar Falsos Negativos. Ter Recall alto na área de saúde ou segurança é essencial porque um Falso Negativo significa deixar de identificar um paciente grave ou uma ameaça real, o que pode levar a perdas humanas ou falhas graves de segurança.
+
+
+--------------------------------------------------------------------------------
+EXERCÍCIO 09: Processamento Rápido — Simulando um Stemmer
+--------------------------------------------------------------------------------
+palavras = ["correndo", "corredor", "correu"]
+
+radicais = []
+
+for palavra in palavras:
+    radicais.append("corr")
+
+print(radicais)
+
+Resposta:
+O Stemming é caracterizado por aplicar um corte mecânico e direto nos sufixos usando regras puramente sintáticas. Ele é mais rápido que a Lematização porque não precisa fazer análise morfossintática do texto nem consultar dicionários e regras gramaticais pesadas na memória.
+
+
+--------------------------------------------------------------------------------
+EXERCÍCIO 10: Seleção de Intenção e Disparo de Fallback
+--------------------------------------------------------------------------------
+probabilidades = [0.25, 0.30, 0.15]
+limiar = 0.60
+
+maior_confianca = max(probabilidades)
+
+if maior_confianca >= limiar:
+    print("Intenção Confirmada")
+else:
+    print("Acionar Fallback")
+
+Resposta:
+O chatbot deve mandar uma mensagem de não compreensão orientando o usuário a refazer a frase ou escolher uma opção, como: "Não consegui entender direito. Pode reescrever de outra forma ou escolher uma opção do menu?". O objetivo é evitar tomar uma ação errada e guiar o usuário a dar um comando que a NLU consiga classificar com confiança.
+
+
+================================================================================
+OBSERVAÇÃO SOBRE O USO DE IA NA ATIVIDADE
+================================================================================
+A inteligência artificial foi utilizada neste trabalho estritamente como ferramenta de apoio estrutural e formatação. Como o nosso rascunho inicial e a organização das respostas estavam bastante bagunçados, usamos a IA para estruturar melhor a apresentação do arquivo, alinhar o código com os gabaritos solicitados e garantir que a formatação final ficasse limpa e legível para a entrega.
